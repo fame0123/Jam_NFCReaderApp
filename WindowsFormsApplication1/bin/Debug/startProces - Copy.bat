@@ -1,6 +1,6 @@
 @echo off
 
-php jam.php
+php Send_NFC.php
 
 @echo ............................................Uploading Data Please Wait............................................
 timeout 5

@@ -11,7 +11,7 @@ namespace WindowsFormsApplication1
         public string BoatId { get; set; }
         public string CatchId { get; set; }
         public string Latitude { get; set; }
-        public string Longhitud { get; set; }
+        public string Longitude { get; set; }
         public string TimeStamp { get; set; }
         public string Weight { get; set; }
         public string Species { get; set; }
@@ -30,6 +30,7 @@ namespace WindowsFormsApplication1
         public string Processor { get; set; }
         public string FairTradeTagId { get; set; }
         public string Certified { get; set; }
+
 
     }
 }

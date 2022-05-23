@@ -13,7 +13,7 @@ using System.IO;
 using System.Threading;
 using System.Drawing.Printing;
 using Newtonsoft.Json;
-
+using WindowsFormsApplication1.Helper;
 
 namespace WindowsFormsApplication1
 {
@@ -634,73 +634,113 @@ namespace WindowsFormsApplication1
                 if (dataGridView1.Rows.Count > 0)
                 {
                     int cnt = 0;
+                    var fishRecordList = new List<FishRecord>();
+
                     for (int i = 0; i < dataGridView1.Rows.Count; i++)
                     {
 
-                        string BoatID = dataGridView1.Rows[cnt].Cells[0].Value.ToString();
-                        string FishID = dataGridView1.Rows[cnt].Cells[1].Value.ToString();
-                        string lat = dataGridView1.Rows[cnt].Cells[2].Value.ToString();
-                        string lng = dataGridView1.Rows[cnt].Cells[3].Value.ToString();
-                        string Petsa = dataGridView1.Rows[cnt].Cells[4].Value.ToString();
-                        string Weight = dataGridView1.Rows[cnt].Cells[5].Value.ToString();
-                        string species = dataGridView1.Rows[cnt].Cells[6].Value.ToString();
-                        string validity = dataGridView1.Rows[cnt].Cells[7].Value.ToString();
-                        string cap = dataGridView1.Rows[cnt].Cells[8].Value.ToString();
-                        string botname = dataGridView1.Rows[cnt].Cells[9].Value.ToString();
-                        string license = dataGridView1.Rows[cnt].Cells[10].Value.ToString();
-                        string locate = dataGridView1.Rows[cnt].Cells[11].Value.ToString();
-                        string idno = dataGridView1.Rows[cnt].Cells[12].Value.ToString();
-                        string departureTime = dataGridView1.Rows[cnt].Cells[13].Value.ToString();
-                        string arrivalTime = dataGridView1.Rows[cnt].Cells[14].Value.ToString();
-                        string supplier = dataGridView1.Rows[cnt].Cells[15].Value.ToString();
-                        string tagId = dataGridView1.Rows[cnt].Cells[16].Value.ToString();
-                        string classification = dataGridView1.Rows[cnt].Cells[17].Value.ToString();
-                        string enumeratorName = dataGridView1.Rows[cnt].Cells[18].Value.ToString();
-                        string processor = dataGridView1.Rows[cnt].Cells[18].Value.ToString();
-                        string fairTradeTagId = dataGridView1.Rows[cnt].Cells[18].Value.ToString();
-                        string certified = dataGridView1.Rows[cnt].Cells[18].Value.ToString();
-
-                        string notepad_append = "{\"BoatId\":\"" + BoatID + "\"," +
-                                                "\"CatchId\":\"" + FishID + "\"," +
-                                                "\"Latitude\":\"" + lat + "\"," +
-                                                "\"Longhitud\":\"" + lng + "\"," +
-                                                "\"TimeStamp\":\"" + Petsa + "\"," +
-                                                "\"Weight\":\"" + Weight + "\"," +
-                                                "\"Species\":\"" + species + "\"," +
-                                                "\"Validity\":\"" + validity + "\"," +
-                                                "\"Captain\":\"" + cap + "\"," +
-                                                "\"BoatName\":\"" + botname + "\"," +
-                                                "\"LicenseId\":\"" + license + "\"," +
-                                                "\"Location\":\"" + locate + "\"," +
-                                                "\"IdNo\":\"" + idno + "\"" +
-                                                "\"DepartureTime\":\"" + departureTime + "\"," +
-                                                "\"ArrivalTime\":\"" + arrivalTime + "\"," +
-                                                "\"Supplier\":\"" + supplier + "\"," +
-                                                "\"TagId\":\"" + tagId + "\"," +
-                                                "\"Classification\":\"" + classification + "\"," +
-                                                "\"EnumeratorName\":\"" + enumeratorName + "\"," +
-                                                "\"Processor\":\"" + processor + "\"," +
-                                                "\"FairTradeTagId\":\"" + fairTradeTagId + "\"," +
-                                                "\"Certified\":\"" + certified + "\"" +
-                                                "}+";
-
-                        StreamWriter log = File.AppendText("jam.txt");
-                        log.WriteLine(notepad_append);
-                        log.Close();
+                        var fishRecord = new FishRecord
+                        {
+                             BoatId = dataGridView1.Rows[cnt].Cells[0].Value.ToString(),
+                             CatchId = dataGridView1.Rows[cnt].Cells[1].Value.ToString(),
+                             Latitude = dataGridView1.Rows[cnt].Cells[2].Value.ToString(),
+                             Longitude = dataGridView1.Rows[cnt].Cells[3].Value.ToString(),
+                             TimeStamp = dataGridView1.Rows[cnt].Cells[4].Value.ToString(),
+                             Weight = dataGridView1.Rows[cnt].Cells[5].Value.ToString(),
+                             Species = dataGridView1.Rows[cnt].Cells[6].Value.ToString(),
+                             Validity = dataGridView1.Rows[cnt].Cells[7].Value.ToString(),
+                             Captain = dataGridView1.Rows[cnt].Cells[8].Value.ToString(),
+                             BoatName = dataGridView1.Rows[cnt].Cells[9].Value.ToString(),
+                             LicenseId = dataGridView1.Rows[cnt].Cells[10].Value.ToString(),
+                             Location = dataGridView1.Rows[cnt].Cells[11].Value.ToString(),
+                             IdNo = dataGridView1.Rows[cnt].Cells[12].Value.ToString(),
+                             DepartureTime = dataGridView1.Rows[cnt].Cells[13].Value.ToString(),
+                             ArrivalTime = dataGridView1.Rows[cnt].Cells[14].Value.ToString(),
+                             Supplier = dataGridView1.Rows[cnt].Cells[15].Value.ToString(),
+                             TagId = dataGridView1.Rows[cnt].Cells[16].Value.ToString(),
+                             Classification = dataGridView1.Rows[cnt].Cells[17].Value.ToString(),
+                             EnumeratorName = dataGridView1.Rows[cnt].Cells[18].Value.ToString(),
+                             Processor = dataGridView1.Rows[cnt].Cells[19].Value.ToString(),
+                             FairTradeTagId = dataGridView1.Rows[cnt].Cells[20].Value.ToString(),
+                             Certified = dataGridView1.Rows[cnt].Cells[21].Value.ToString()
+                        };
 
 
-                        DateTime today = DateTime.Today;
-                        //string data_Record = "{\"boatid\":" + BoatID + ",\"fishid\":" + FishID + ",\"lat\":" + lng + ",\"lon\":" + lng + ",\"timestamp\":" + Petsa + ",\"weight\":" + Weight + ",\"size\":" + Size + "}";
-                        StreamWriter log1 = File.AppendText("data_Record/" + today.ToString("dd-MM-yyyy") + ".txt");
-                        log1.WriteLine(notepad_append);
-                        log1.Close();
+                        fishRecordList.Add(fishRecord);
+
+
+                        //string BoatID = dataGridView1.Rows[cnt].Cells[0].Value.ToString();
+                        //string FishID = dataGridView1.Rows[cnt].Cells[1].Value.ToString();
+                        //string lat = dataGridView1.Rows[cnt].Cells[2].Value.ToString();
+                        //string lng = dataGridView1.Rows[cnt].Cells[3].Value.ToString();
+                        //string Petsa = dataGridView1.Rows[cnt].Cells[4].Value.ToString();
+                        //string Weight = dataGridView1.Rows[cnt].Cells[5].Value.ToString();
+                        //string species = dataGridView1.Rows[cnt].Cells[6].Value.ToString();
+                        //string validity = dataGridView1.Rows[cnt].Cells[7].Value.ToString();
+                        //string cap = dataGridView1.Rows[cnt].Cells[8].Value.ToString();
+                        //string botname = dataGridView1.Rows[cnt].Cells[9].Value.ToString();
+                        //string license = dataGridView1.Rows[cnt].Cells[10].Value.ToString();
+                        //string locate = dataGridView1.Rows[cnt].Cells[11].Value.ToString();
+                        //string idno = dataGridView1.Rows[cnt].Cells[12].Value.ToString();
+                        //string departureTime = dataGridView1.Rows[cnt].Cells[13].Value.ToString();
+                        //string arrivalTime = dataGridView1.Rows[cnt].Cells[14].Value.ToString();
+                        //string supplier = dataGridView1.Rows[cnt].Cells[15].Value.ToString();
+                        //string tagId = dataGridView1.Rows[cnt].Cells[16].Value.ToString();
+                        //string classification = dataGridView1.Rows[cnt].Cells[17].Value.ToString();
+                        //string enumeratorName = dataGridView1.Rows[cnt].Cells[18].Value.ToString();
+                        //string processor = dataGridView1.Rows[cnt].Cells[18].Value.ToString();
+                        //string fairTradeTagId = dataGridView1.Rows[cnt].Cells[18].Value.ToString();
+                        //string certified = dataGridView1.Rows[cnt].Cells[18].Value.ToString();
+
+
+                        //string notepad_append = "{\"BoatId\":\"" + BoatID + "\"," +
+                        //                        "\"CatchId\":\"" + FishID + "\"," +
+                        //                        "\"Latitude\":\"" + lat + "\"," +
+                        //                        "\"Longitude\":\"" + lng + "\"," +
+                        //                        "\"TimeStamp\":\"" + Petsa + "\"," +
+                        //                        "\"Weight\":\"" + Weight + "\"," +
+                        //                        "\"Species\":\"" + species + "\"," +
+                        //                        "\"Validity\":\"" + validity + "\"," +
+                        //                        "\"Captain\":\"" + cap + "\"," +
+                        //                        "\"BoatName\":\"" + botname + "\"," +
+                        //                        "\"LicenseId\":\"" + license + "\"," +
+                        //                        "\"Location\":\"" + locate + "\"," +
+                        //                        "\"IdNo\":\"" + idno + "\"," +
+                        //                        "\"DepartureTime\":\"" + departureTime + "\"," +
+                        //                        "\"ArrivalTime\":\"" + arrivalTime + "\"," +
+                        //                        "\"Supplier\":\"" + supplier + "\"," +
+                        //                        "\"TagId\":\"" + tagId + "\"," +
+                        //                        "\"Classification\":\"" + classification + "\"," +
+                        //                        "\"EnumeratorName\":\"" + enumeratorName + "\"," +
+                        //                        "\"Processor\":\"" + processor + "\"," +
+                        //                        "\"FairTradeTagId\":\"" + fairTradeTagId + "\"," +
+                        //                        "\"Certified\":\"" + certified + "\"" +
+                        //                        "}+";
+
+                        //StreamWriter log = File.AppendText("jam.txt");
+                        //log.WriteLine(notepad_append);
+                        //log.Close();
+
+
+                        //DateTime today = DateTime.Today;
+                        ////string data_Record = "{\"boatid\":" + BoatID + ",\"fishid\":" + FishID + ",\"lat\":" + lng + ",\"lon\":" + lng + ",\"timestamp\":" + Petsa + ",\"weight\":" + Weight + ",\"size\":" + Size + "}";
+                        //StreamWriter log1 = File.AppendText("data_Record/" + today.ToString("dd-MM-yyyy") + ".txt");
+                        //log1.WriteLine(notepad_append);
+                        //log1.Close();
 
                         cnt++;
                         //richTextBox1.AppendText(i.ToString());
                     }
-                    Process process = Process.Start(@"startProces.bat");
+
+                    var response = Request.PostRequest(fishRecordList);
+
+                    MessageBox.Show(response, "Upload Record",MessageBoxButtons.OK);
+                    //Process process = Process.Start(@"startProces.bat");
                 }
-                else { MessageBox.Show("No Data to Upload... Please Scan the NFC Card and Click Upload Button Again Thank You."); }
+                else 
+                {
+                    MessageBox.Show("No Data to Upload... Please Scan the NFC Card and Click Upload Button Again Thank You.");
+                }
 
                
 
@@ -877,7 +917,7 @@ namespace WindowsFormsApplication1
                             BoatId = BoatID,
                             CatchId = FishID,
                             Latitude = lat,
-                            Longhitud = lng,
+                            Longitude = lng,
                             TimeStamp = Petsa,
                             Weight = Weight,
                             Species = species,
@@ -920,6 +960,31 @@ namespace WindowsFormsApplication1
         }
 
         private void panel2_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pictureBox2_Click(object sender, EventArgs e)
         {
 
         }

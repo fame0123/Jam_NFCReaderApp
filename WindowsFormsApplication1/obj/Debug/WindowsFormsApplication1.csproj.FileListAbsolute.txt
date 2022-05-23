@@ -126,3 +126,6 @@ D:\project\Jam\NFC_Layout\WindowsFormsApplication1\obj\Debug\WindowsFormsApplica
 D:\project\Jam\NFC_Layout\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.exe
 D:\project\Jam\NFC_Layout\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.pdb
 D:\project\Jam\NFC_Layout\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.FormAddCaptain.resources
+D:\project\Jam\NFC_Layout\WindowsFormsApplication1\bin\Debug\RestSharp.dll
+D:\project\Jam\NFC_Layout\WindowsFormsApplication1\bin\Debug\RestSharp.xml
+D:\project\Jam\NFC_Layout\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.Helper.Loading.resources

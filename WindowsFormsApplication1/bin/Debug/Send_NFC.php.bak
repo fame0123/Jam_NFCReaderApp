@@ -35,7 +35,7 @@ for($i = 0; $i < $length; $i++)
 function SendToServer($line) {
     $data_string = $line;
 	
-	$ch = curl_init('https://jam.document.fish/api/1.1/obj/');//('https://jam.document.fish/version-test/api/1.1/obj');// where to post        
+	$ch = curl_init("https://jam.document.fish/version-test/api/1.1/obj")//('https://jam.document.fish/api/1.1/obj/');// where to post        
 	curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
 	curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -48,7 +48,7 @@ function SendToServer($line) {
 	//} else {
 	//echo "no data sent";
 	//}
-	echo $data_string . "\n";
+	echo $data_string;
 	
 }
 
