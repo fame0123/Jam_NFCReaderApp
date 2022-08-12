@@ -110,7 +110,7 @@ namespace WindowsFormsApplication1
             }
             try
             {
-                if (i == 8)
+                if (i >= 4)
                 {
                     //MessageBox.Show(value);
                     
