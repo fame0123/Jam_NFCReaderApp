@@ -41,18 +41,75 @@ namespace WindowsFormsApplication1
             //MessageBox.Show(MainForm.global_var1);
 
             string[] str = MainForm.global_var1.Split('&');
+            try
+            {
+                if (str.Length == 3)
+                {
+                    txt_boatid.Text = str[0];
 
-            if (str.Length == 4 )
+                    txt_fishid.Text = str[1];
+
+                    var latLon = str[2].Split(' ');
+
+                    txt_lat.Text = latLon[0];
+                    txt_lng.Text = latLon[1];
+
+                }
+            }
+            catch { }
+
+            if (str.Length == 4)
             {
                 txt_boatid.Text = str[0];
-                var latLonSplit = str[1].Split(' ');
-                txt_lat.Text = latLonSplit[0];
-                txt_lng.Text = latLonSplit[1];
-                txt_date.Text = str[2];
-                txt_LicId.Text = str[3];
+
+                txt_fishid.Text = str[1];
+
+                var latLon = str[2].Split(' ');
+
+                txt_lat.Text = latLon[0];
+                txt_lng.Text = latLon[1];
+
+                var boatNameAndLicNum = str[3].Split('+');
+
+                txt_boatName.Text = boatNameAndLicNum[0];
+                txt_LicId.Text = boatNameAndLicNum[1];
+                return;
             }
 
-            if (str.Length != 22)
+            if (str.Length == 4)
+            {
+                txt_boatid.Text = str[0]; 
+
+                txt_fishid.Text = str[1];
+
+                var latLon = str[2].Split(' ');
+
+                txt_lat.Text = latLon[0];
+                txt_lng.Text = latLon[1];
+
+
+                txt_boatName.Text = str[3];
+            }
+
+            if (str.Length == 8)
+            {
+                txt_boatid.Text = str[0];
+                txt_fishid.Text = str[1];
+
+                var latLon = str[2].Split(' ');
+                txt_lat.Text = latLon[0];
+                txt_lng.Text = latLon[1];
+
+                txt_date.Text = str[3]; //TimeStampConfiguration  TimeStampConverter
+                txt_boatCap.Text = str[4];
+                txt_boatName.Text = str[5];
+                txt_LicId.Text = str[6];
+                txt_locattion.Text = str[7];
+                return;
+            }
+            
+
+            if (str.Length != 23)
             { return; }
             txt_boatid.Text = str[0];
             txt_fishid.Text = str[1];
@@ -76,6 +133,7 @@ namespace WindowsFormsApplication1
             txt_processor.Text = str[19];
             txt_fairTradeTagId.Text = str[20];
             chkbox_certified.Checked = str[21] == "Yes"? true:false;
+            txt_price.Text = str[22];
 
             if (global_var3 == "save")
             {
@@ -167,6 +225,7 @@ namespace WindowsFormsApplication1
                 string processor = txt_processor.Text;
                 string fairTradeTagId = txt_fairTradeTagId.Text;
                 string certified = chkbox_certified.Checked == true? "Yes" : "No";
+                string price = txt_price.Text;
 
                 global_var2 = boatid + "&" + 
                               fishid + "&" + 
@@ -189,7 +248,8 @@ namespace WindowsFormsApplication1
                               enumeratorName + "&" +
                               processor + "&" +
                               fairTradeTagId + "&" +
-                              certified; 
+                              certified + "&" +
+                              price; 
 
                 if (global_var3 == "edit") //
                 {
@@ -271,6 +331,19 @@ namespace WindowsFormsApplication1
         {
              new FormAddCaptain().ShowDialog();
            
+        }
+
+        private void txt_weit_TextChanged(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(txt_weit.Text))
+            {
+                var price = Convert.ToDouble(txt_weit.Text) * 3;
+                txt_price.Text = price.ToString();
+            }
+            else
+            {
+                txt_price.Text = "0";
+            }
         }
     }
 }

@@ -110,7 +110,7 @@ namespace WindowsFormsApplication1
             }
             try
             {
-                if (i >= 4)
+                if (i >= 8 || i >= 4)
                 {
                     //MessageBox.Show(value);
                     
@@ -151,7 +151,7 @@ namespace WindowsFormsApplication1
                             string form2_data = str_data[x];
                             if (x == 4)
                             {
-                                //str_data[x]; //=========================================================================================================
+                                //str_data[x]; //========================================
                                 char[] stamp = str_data[x].Trim().ToCharArray();
                                 //MessageBox.Show(stamp.Length.ToString());
 
@@ -233,10 +233,9 @@ namespace WindowsFormsApplication1
                     dataGridView1.ClearSelection();
                     
                 }
-                //else { MessageBox.Show("NFC Card Have Less or More Than Expected Data. \n Please Try Another Card"); i = 0; }
                 
             }
-            catch { MessageBox.Show("NFC Card Have Less or More Than Expected Data. \n Please  Try Another Card...!"); i = 0; }
+            catch (Exception ex) { MessageBox.Show("NFC Card Have Less or More Than Expected Data. \n Please  Try Another Card...!"); i = 0; }
         }
        
         private void MainForm_Load(object sender, EventArgs e)// -========================= Main Form
@@ -274,7 +273,7 @@ namespace WindowsFormsApplication1
             string spliter;
 
 
-            //================================================================================================ Read .Txt File and Convert to Json
+            //======================================================= Read .Txt File and Convert to Json
             string[] _fileName = recordFileName.Split('&');
             if (_fileName[1] == "confirm")
             {
@@ -295,7 +294,7 @@ namespace WindowsFormsApplication1
                     int x = 0;
                     string valz = "";
                     var dictionary = JsonConvert.DeserializeObject<System.Collections.IDictionary>(jsonSplit[i]);
-                    //MessageBox.Show();
+                    
                     foreach (System.Collections.DictionaryEntry entry in dictionary)
                     {
                         if (entry.Key.ToString() == "CatchId")
@@ -312,13 +311,10 @@ namespace WindowsFormsApplication1
 
                     if (valz == "0")
                     {
-                        //MessageBox.Show(data_holder);
                         string[] data_holder_split = data_holder.Split('%');
 
                         addrow = dataGridView1.Rows.Add();
-                        //MessageBox.Show(addrow.ToString());
-                        //for (int j = 0; j < data_holder_split.Length; j++)
-                        //{
+                         
                         dataGridView1.Rows[addrow].Cells[0].Value = data_holder_split[0];
                         dataGridView1.Rows[addrow].Cells[1].Value = data_holder_split[1];
                         dataGridView1.Rows[addrow].Cells[2].Value = data_holder_split[2];
@@ -341,6 +337,7 @@ namespace WindowsFormsApplication1
                         dataGridView1.Rows[addrow].Cells[19].Value = data_holder_split[19];
                         dataGridView1.Rows[addrow].Cells[20].Value = data_holder_split[20];
                         dataGridView1.Rows[addrow].Cells[21].Value = data_holder_split[21];
+                        dataGridView1.Rows[addrow].Cells[22].Value = data_holder_split[22];
                         //}
                     }
                     data_holder = "";
@@ -468,6 +465,7 @@ namespace WindowsFormsApplication1
                     string processor = dataGridView1.Rows[cnt].Cells[19].Value.ToString();
                     string fairTradeTagId = dataGridView1.Rows[cnt].Cells[20].Value.ToString();
                     string certified = dataGridView1.Rows[cnt].Cells[21].Value.ToString();
+                    string price = dataGridView1.Rows[cnt].Cells[22].Value.ToString();
                     //MessageBox.Show(cap+botname+license+locate);
                     string notepad_append = "{\"BoatId\":\"" + BoatID + "\"," +
                                             "\"CatchId\":\"" + FishID + "\"," +
@@ -490,7 +488,8 @@ namespace WindowsFormsApplication1
                                             "\"EnumeratorName\":\"" + enumeratorName + "\"," +
                                             "\"Processor\":\"" + processor + "\"," +
                                             "\"FairTradeTagId\":\"" + fairTradeTagId + "\"," +
-                                            "\"Certified\":\"" + certified + "\"" +
+                                            "\"Certified\":\"" + certified + "\"," +
+                                            "\"Price\":\"" + price + "\"" +
                                             "}+";
 
 
@@ -538,6 +537,7 @@ namespace WindowsFormsApplication1
                 string processor = dataGridView1.Rows[index].Cells[19].Value.ToString();
                 string fairTradeTagId = dataGridView1.Rows[index].Cells[20].Value.ToString();
                 string certified = dataGridView1.Rows[index].Cells[21].Value.ToString();
+                string price = dataGridView1.Rows[index].Cells[22].Value.ToString();
 
                 global_var1 = BoatID + "&" +
                               FishID + "&" +
@@ -560,7 +560,8 @@ namespace WindowsFormsApplication1
                               enumeratorName + "&" +
                               processor + "&" +
                               fairTradeTagId + "&" +
-                              certified;
+                              certified + "&" +
+                              price;
                               
                 spliter = "";
                 Form2 f2 = new Form2();
@@ -593,6 +594,7 @@ namespace WindowsFormsApplication1
                     dataGridView1.Rows[index].Cells[19].Value = str_data[19];
                     dataGridView1.Rows[index].Cells[20].Value = str_data[20];
                     dataGridView1.Rows[index].Cells[21].Value = str_data[21];
+                    dataGridView1.Rows[index].Cells[22].Value = str_data[22];
 
                     Form2.global_var3 = "";
                 }
@@ -662,74 +664,15 @@ namespace WindowsFormsApplication1
                              EnumeratorName = dataGridView1.Rows[cnt].Cells[18].Value.ToString(),
                              Processor = dataGridView1.Rows[cnt].Cells[19].Value.ToString(),
                              FairTradeTagId = dataGridView1.Rows[cnt].Cells[20].Value.ToString(),
-                             Certified = dataGridView1.Rows[cnt].Cells[21].Value.ToString()
+                             Certified = dataGridView1.Rows[cnt].Cells[21].Value.ToString(),
+                             Price = dataGridView1.Rows[cnt].Cells[22].Value.ToString()
                         };
 
 
                         fishRecordList.Add(fishRecord);
 
-
-                        //string BoatID = dataGridView1.Rows[cnt].Cells[0].Value.ToString();
-                        //string FishID = dataGridView1.Rows[cnt].Cells[1].Value.ToString();
-                        //string lat = dataGridView1.Rows[cnt].Cells[2].Value.ToString();
-                        //string lng = dataGridView1.Rows[cnt].Cells[3].Value.ToString();
-                        //string Petsa = dataGridView1.Rows[cnt].Cells[4].Value.ToString();
-                        //string Weight = dataGridView1.Rows[cnt].Cells[5].Value.ToString();
-                        //string species = dataGridView1.Rows[cnt].Cells[6].Value.ToString();
-                        //string validity = dataGridView1.Rows[cnt].Cells[7].Value.ToString();
-                        //string cap = dataGridView1.Rows[cnt].Cells[8].Value.ToString();
-                        //string botname = dataGridView1.Rows[cnt].Cells[9].Value.ToString();
-                        //string license = dataGridView1.Rows[cnt].Cells[10].Value.ToString();
-                        //string locate = dataGridView1.Rows[cnt].Cells[11].Value.ToString();
-                        //string idno = dataGridView1.Rows[cnt].Cells[12].Value.ToString();
-                        //string departureTime = dataGridView1.Rows[cnt].Cells[13].Value.ToString();
-                        //string arrivalTime = dataGridView1.Rows[cnt].Cells[14].Value.ToString();
-                        //string supplier = dataGridView1.Rows[cnt].Cells[15].Value.ToString();
-                        //string tagId = dataGridView1.Rows[cnt].Cells[16].Value.ToString();
-                        //string classification = dataGridView1.Rows[cnt].Cells[17].Value.ToString();
-                        //string enumeratorName = dataGridView1.Rows[cnt].Cells[18].Value.ToString();
-                        //string processor = dataGridView1.Rows[cnt].Cells[18].Value.ToString();
-                        //string fairTradeTagId = dataGridView1.Rows[cnt].Cells[18].Value.ToString();
-                        //string certified = dataGridView1.Rows[cnt].Cells[18].Value.ToString();
-
-
-                        //string notepad_append = "{\"BoatId\":\"" + BoatID + "\"," +
-                        //                        "\"CatchId\":\"" + FishID + "\"," +
-                        //                        "\"Latitude\":\"" + lat + "\"," +
-                        //                        "\"Longitude\":\"" + lng + "\"," +
-                        //                        "\"TimeStamp\":\"" + Petsa + "\"," +
-                        //                        "\"Weight\":\"" + Weight + "\"," +
-                        //                        "\"Species\":\"" + species + "\"," +
-                        //                        "\"Validity\":\"" + validity + "\"," +
-                        //                        "\"Captain\":\"" + cap + "\"," +
-                        //                        "\"BoatName\":\"" + botname + "\"," +
-                        //                        "\"LicenseId\":\"" + license + "\"," +
-                        //                        "\"Location\":\"" + locate + "\"," +
-                        //                        "\"IdNo\":\"" + idno + "\"," +
-                        //                        "\"DepartureTime\":\"" + departureTime + "\"," +
-                        //                        "\"ArrivalTime\":\"" + arrivalTime + "\"," +
-                        //                        "\"Supplier\":\"" + supplier + "\"," +
-                        //                        "\"TagId\":\"" + tagId + "\"," +
-                        //                        "\"Classification\":\"" + classification + "\"," +
-                        //                        "\"EnumeratorName\":\"" + enumeratorName + "\"," +
-                        //                        "\"Processor\":\"" + processor + "\"," +
-                        //                        "\"FairTradeTagId\":\"" + fairTradeTagId + "\"," +
-                        //                        "\"Certified\":\"" + certified + "\"" +
-                        //                        "}+";
-
-                        //StreamWriter log = File.AppendText("jam.txt");
-                        //log.WriteLine(notepad_append);
-                        //log.Close();
-
-
-                        //DateTime today = DateTime.Today;
-                        ////string data_Record = "{\"boatid\":" + BoatID + ",\"fishid\":" + FishID + ",\"lat\":" + lng + ",\"lon\":" + lng + ",\"timestamp\":" + Petsa + ",\"weight\":" + Weight + ",\"size\":" + Size + "}";
-                        //StreamWriter log1 = File.AppendText("data_Record/" + today.ToString("dd-MM-yyyy") + ".txt");
-                        //log1.WriteLine(notepad_append);
-                        //log1.Close();
-
                         cnt++;
-                        //richTextBox1.AppendText(i.ToString());
+                        
                     }
 
                     var response = Request.PostRequest(fishRecordList);
@@ -911,6 +854,7 @@ namespace WindowsFormsApplication1
                         string processor = dataGridView1.Rows[count].Cells[19].Value.ToString();
                         string fairTradeTagId = dataGridView1.Rows[count].Cells[20].Value.ToString();
                         string certified = dataGridView1.Rows[count].Cells[21].Value.ToString();
+                        string price = dataGridView1.Rows[count].Cells[22].Value.ToString();
                        
                         fishContainer.Add(new FishRecord
                         {
@@ -935,7 +879,8 @@ namespace WindowsFormsApplication1
                             EnumeratorName = enumeratorName,
                             Processor = processor,
                             FairTradeTagId = fairTradeTagId,
-                            Certified = certified
+                            Certified = certified,
+                            Price = price
                         });
                         count++;
                     }

@@ -30,7 +30,7 @@ namespace WindowsFormsApplication1
         public string Processor { get; set; }
         public string FairTradeTagId { get; set; }
         public string Certified { get; set; }
-
+        public string Price { get; set; }
 
     }
 }

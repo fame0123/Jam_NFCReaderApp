@@ -80,6 +80,8 @@
             this.txt_fairTradeTagId = new System.Windows.Forms.TextBox();
             this.label22 = new System.Windows.Forms.Label();
             this.chkbox_certified = new System.Windows.Forms.CheckBox();
+            this.txt_price = new System.Windows.Forms.TextBox();
+            this.label23 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -215,9 +217,10 @@
             this.txt_weit.Location = new System.Drawing.Point(123, 186);
             this.txt_weit.Multiline = true;
             this.txt_weit.Name = "txt_weit";
-            this.txt_weit.Size = new System.Drawing.Size(148, 30);
+            this.txt_weit.Size = new System.Drawing.Size(47, 30);
             this.txt_weit.TabIndex = 5;
             this.txt_weit.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txt_weit.TextChanged += new System.EventHandler(this.txt_weit_TextChanged);
             this.txt_weit.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_weit_KeyPress);
             // 
             // label8
@@ -677,6 +680,27 @@
             this.chkbox_certified.Text = "Certified";
             this.chkbox_certified.UseVisualStyleBackColor = true;
             // 
+            // txt_price
+            // 
+            this.txt_price.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_price.Location = new System.Drawing.Point(194, 185);
+            this.txt_price.Multiline = true;
+            this.txt_price.Name = "txt_price";
+            this.txt_price.Size = new System.Drawing.Size(76, 30);
+            this.txt_price.TabIndex = 5;
+            this.txt_price.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txt_price.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_weit_KeyPress);
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label23.Location = new System.Drawing.Point(172, 193);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(18, 16);
+            this.label23.TabIndex = 0;
+            this.label23.Text = "₱";
+            // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -713,6 +737,7 @@
             this.Controls.Add(this.txt_LicId);
             this.Controls.Add(this.txt_boatName);
             this.Controls.Add(this.txt_boatCap);
+            this.Controls.Add(this.txt_price);
             this.Controls.Add(this.txt_weit);
             this.Controls.Add(this.txt_date);
             this.Controls.Add(this.txt_lng);
@@ -722,6 +747,7 @@
             this.Controls.Add(this.label14);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.txt_boatid);
+            this.Controls.Add(this.label23);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label12);
             this.Controls.Add(this.label11);
@@ -794,5 +820,7 @@
         private System.Windows.Forms.CheckBox chkbox_certified;
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.TextBox txt_fairTradeTagId;
+        private System.Windows.Forms.TextBox txt_price;
+        private System.Windows.Forms.Label label23;
     }
 }
